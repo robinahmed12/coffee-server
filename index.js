@@ -65,6 +65,27 @@ async function run() {
     })
 
 
+    // updated
+
+    app.put('/coffees/:id' , async(req , res)=>{
+
+      const id = req.params.id
+      const filter = {_id: new ObjectId(id)}
+      const updatedCoffee = req.body
+
+      const updateDoc = {
+        $set:  updatedCoffee
+         
+        
+      }
+
+      const result = await coffeeCollection.updateOne(filter , updateDoc)
+      res.send(result)
+      console.log(result);
+      
+    })
+
+
 
     await client.db("admin").command({ ping: 1 });
     console.log(
